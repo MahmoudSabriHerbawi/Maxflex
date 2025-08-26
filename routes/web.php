@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
     // Notifications
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::post('/notifications/read-all', [NotificationController::class, 'readAll'])->name('notifications.readAll');
+    Route::post('/notifications/{id}/read', [NotificationController::class, 'readOne'])->name('notifications.readOne'); // ← أضف هذا
 
     // Admin-only: Series & Categories
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {

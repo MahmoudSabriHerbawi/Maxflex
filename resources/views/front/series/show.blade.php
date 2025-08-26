@@ -1,7 +1,14 @@
 @extends('layouts.master')
 @section('title', $series->title)
 
+
 @section('content')
+@guest
+  <div class="alert alert-warning d-flex align-items-center" role="alert">
+    <i class="bi bi-info-circle me-2"></i>
+    <div>You must log in to watch episodes.</div>
+  </div>
+@endguest
 <div class="row g-4">
   <div class="col-md-4">
    @php
@@ -50,7 +57,12 @@
                 @if($e->release_date) • Release: {{ $e->release_date }} @endif
               </div>
             </div>
-            <a href="{{ $e->video_url }}" target="_blank" class="btn btn-sm btn-primary">Watch</a>
+            @auth
+                <a href="{{ $e->video_url }}" target="_blank" class="btn btn-primary btn-sm">
+                Watch
+                </a>
+            @endauth
+
           </div>
           @if($e->description)
             <div class="small mt-2 text-muted">{{ $e->description }}</div>
