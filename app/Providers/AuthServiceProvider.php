@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Policies\SeriesPolicy;
 use App\Policies\EpisodePolicy;
 use App\Policies\CategoryPolicy;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -29,6 +30,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Paginator::useBootstrapFive();
     }
 }
