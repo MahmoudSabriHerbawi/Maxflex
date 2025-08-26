@@ -35,9 +35,9 @@
 
       <div class="mt-1">
         @if($type === 'series' && isset($data['id']))
-          <a class="btn btn-sm btn-outline-primary" href="{{ route('front.series.show', $data['id']) }}">View series</a>
+          <a class="btn btn-sm btn-outline-dark" href="{{ route('front.series.show', $data['id']) }}">View series</a>
         @elseif($type === 'episode' && isset($data['video_url']))
-          <a class="btn btn-sm btn-outline-primary" target="_blank" href="{{ $data['video_url'] }}">Watch</a>
+          <a class="btn btn-sm btn-outline-dark" target="_blank" href="{{ $data['video_url'] }}">Watch</a>
           @if(isset($data['series_id']))
             <a class="btn btn-sm btn-outline-secondary" href="{{ route('front.series.show', $data['series_id']) }}">Series page</a>
           @endif

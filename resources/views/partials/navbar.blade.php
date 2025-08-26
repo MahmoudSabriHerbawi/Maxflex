@@ -94,10 +94,10 @@
 
                     <div class="mt-1 d-flex gap-2 flex-wrap">
                       @if($type === 'series' && isset($data['id']))
-                        <a class="btn btn-sm btn-outline-primary" href="{{ route('front.series.show', $data['id']) }}">View</a>
+                        <a class="btn btn-sm btn-outline-dark" href="{{ route('front.series.show', $data['id']) }}">View</a>
                       @elseif($type === 'episode')
                         @if(isset($data['video_url']))
-                          <a class="btn btn-sm btn-outline-primary" target="_blank" href="{{ $data['video_url'] }}">Watch</a>
+                          <a class="btn btn-sm btn-outline-dark" target="_blank" href="{{ $data['video_url'] }}">Watch</a>
                         @endif
                         @if(isset($data['series_id']))
                           <a class="btn btn-sm btn-outline-secondary" href="{{ route('front.series.show', $data['series_id']) }}">Series</a>

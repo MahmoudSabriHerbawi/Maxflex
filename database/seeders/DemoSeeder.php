@@ -16,17 +16,17 @@ class DemoSeeder extends Seeder
         // users
         $admin = User::firstOrCreate(
             ['email' => 'admin@test.com'],
-            ['name' => 'Admin', 'password' => Hash::make('123456'), 'role' => 'admin']
+            ['name' => 'Admin', 'password' => Hash::make('123456789'), 'role' => 'admin']
         );
 
         $employee = User::firstOrCreate(
             ['email' => 'employee@test.com'],
-            ['name' => 'Employee', 'password' => Hash::make('123456'), 'role' => 'employee']
+            ['name' => 'Employee', 'password' => Hash::make('123456789'), 'role' => 'employee']
         );
 
         $user = User::firstOrCreate(
             ['email' => 'user@test.com'],
-            ['name' => 'User', 'password' => Hash::make('123456'), 'role' => 'user']
+            ['name' => 'User', 'password' => Hash::make('123456789'), 'role' => 'user']
         );
 
         // categories (fixed names to avoid unique conflicts)
@@ -34,7 +34,7 @@ class DemoSeeder extends Seeder
         $categories = collect($names)->map(fn($n) => Category::firstOrCreate(['name' => $n]));
 
         // series + episodes
-        Series::factory()->count(6)->create()->each(function (Series $s) use ($categories) {
+        Series::factory()->count(10)->create()->each(function (Series $s) use ($categories) {
             // attach 1–3 random categories
             $s->categories()->sync($categories->random(rand(1,3))->pluck('id')->all());
 

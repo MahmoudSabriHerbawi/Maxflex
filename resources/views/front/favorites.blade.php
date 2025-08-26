@@ -21,7 +21,7 @@
             <span class="badge bg-secondary">{{ $cat->name }}</span>
           @endforeach
         </div>
-        <a href="{{ route('front.series.show',$s) }}" class="btn btn-outline-primary btn-sm">Details</a>
+        <a href="{{ route('front.series.show',$s) }}" class="btn btn-outline-dark btn-sm">Details</a>
         <form method="POST" action="{{ route('favorites.destroy',$s->id) }}" class="mt-2">
           @csrf @method('DELETE')
           <button class="btn btn-danger btn-sm w-100">Remove</button>

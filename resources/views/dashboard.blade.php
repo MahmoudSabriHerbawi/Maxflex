@@ -70,7 +70,7 @@
                                     @endforeach
                                 </div>
                                 <a href="{{ route('front.series.show', $s) }}"
-                                    class="btn btn-outline-primary btn-sm mt-auto">Details</a>
+                                    class="btn btn-outline-dark btn-sm mt-auto">Details</a>
                             </div>
                         </div>
                     </div>
@@ -84,15 +84,15 @@
         <div class="card-body">
             <h2 class="h5 mb-3">Quick Actions</h2>
             <div class="d-flex flex-wrap gap-2">
-                <a href="{{ route('front.series.index') }}" class="btn btn-outline-primary">Discover series</a>
+                <a href="{{ route('front.series.index') }}" class="btn btn-outline-dark">Discover series</a>
                 <a href="{{ route('favorites.index') }}" class="btn btn-outline-secondary">View favorites</a>
 
                 @if ($role === 'admin')
-                    <a href="{{ route('admin.series.index') }}" class="btn btn-primary">Manage series</a>
-                    <a href="{{ route('admin.episodes.index') }}" class="btn btn-primary">Manage episodes</a>
-                    <a href="{{ route('admin.categories.index') }}" class="btn btn-primary">Manage categories</a>
+                    <a href="{{ route('admin.series.index') }}" class="btn btn-outline-dark">Manage series</a>
+                    <a href="{{ route('admin.episodes.index') }}" class="btn btn-outline-dark">Manage episodes</a>
+                    <a href="{{ route('admin.categories.index') }}" class="btn btn-outline-dark">Manage categories</a>
                 @elseif($role === 'employee')
-                    <a href="{{ route('admin.episodes.index') }}" class="btn btn-primary">Manage episodes</a>
+                    <a href="{{ route('admin.episodes.index') }}" class="btn btn-outline-dark">Manage episodes</a>
                 @endif
 
                 <a href="{{ route('notifications.index') }}" class="btn btn-outline-dark">

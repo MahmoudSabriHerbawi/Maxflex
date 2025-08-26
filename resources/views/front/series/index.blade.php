@@ -39,7 +39,7 @@
           @endforeach
         </div>
         <p class="card-text text-truncate">{{ $s->description }}</p>
-        <a href="{{ route('front.series.show',$s) }}" class="mt-auto btn btn-outline-primary btn-sm">Details</a>
+        <a href="{{ route('front.series.show',$s) }}" class="mt-auto btn btn-outline-dark btn-sm">Details</a>
       </div>
     </div>
   </div>
