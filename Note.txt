@@ -1,0 +1,7 @@
+Hello Bro,
+
+- The user will git the notification only on the series he added it to fav.
+- make sure to run this command before editing the images "php artisan storage:link".
+- also make sure to run "php artisan queue:work" to make the notification works.
+
+- thanks for your kindness, I am fully appreciate meet you.
