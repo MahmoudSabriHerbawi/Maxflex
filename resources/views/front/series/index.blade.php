@@ -27,9 +27,10 @@
 @foreach($series as $s)
   <div class="col-12 col-sm-6 col-lg-4">
     <div class="card h-100">
-      @if($s->cover_image)
-        <img src="{{ asset('storage/'.$s->cover_image) }}" class="card-img-top" alt="{{ $s->title }}">
-      @endif
+    @php
+        $cover = $s->cover_image ? asset('storage/'.$s->cover_image) : asset('images/default-cover.jpg');
+    @endphp
+    <img src="{{ $cover }}" class="card-img-top" alt="{{ $s->title }}">
       <div class="card-body d-flex flex-column">
         <h5 class="card-title mb-1">{{ $s->title }}</h5>
         <div class="small text-muted mb-2">

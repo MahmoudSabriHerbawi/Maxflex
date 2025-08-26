@@ -12,6 +12,16 @@
           <li class="nav-item"><a class="nav-link" href="{{ route('favorites.index') }}">My Favorites</a></li>
         @endauth
         @auth
+        @php $unread = auth()->user()->unreadNotifications()->count(); @endphp
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('notifications.index') }}">
+            Notifications
+            @if($unread) <span class="badge bg-danger">{{ $unread }}</span> @endif
+            </a>
+        </li>
+        @endauth
+
+        @auth
             <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a></li>
         @endauth
 

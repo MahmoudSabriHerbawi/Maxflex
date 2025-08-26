@@ -8,6 +8,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\DashboardController;
 
 // Admin
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Admin\SeriesController as AdminSeries;
 use App\Http\Controllers\Front\SeriesController as FrontSeries;
 use App\Http\Controllers\Admin\EpisodeController as AdminEpisode;
@@ -27,6 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/favorites', [FavoriteController::class, 'store'])->name('favorites.store');
     Route::delete('/favorites/{series}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
     Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
+
+    // Notifications
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/read-all', [NotificationController  ::class, 'readAll'])->name('notifications.readAll');
 
     // Admin
     Route::prefix('admin')->name('admin.')->group(function () {

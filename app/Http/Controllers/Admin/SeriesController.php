@@ -49,16 +49,18 @@ class SeriesController extends Controller
 
         $series = Series::create($data);
         $series->categories()->sync($r->input('category_ids',[]));
-
+        event(new \App\Events\SeriesCreated($series->id));
         return redirect()->route('admin.series.index')->with('ok','Created');
     }
 
     public function edit(Series $series)
     {
-        $categories = Category::orderBy('name')->get();
-        $selected = $series->categories()->pluck('id')->all();
+        $categories = \App\Models\Category::orderBy('name')->get();
+        $selected = $series->categories()->pluck('categories.id')->all();
+
         return view('admin.series.edit', compact('series','categories','selected'));
     }
+
 
     public function update(Request $r, Series $series)
     {

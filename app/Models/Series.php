@@ -9,7 +9,7 @@ class Series extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'status'];
+    protected $fillable = ['title', 'description', 'status','cover_image'];
 
     public function episodes()
     {
@@ -21,8 +21,9 @@ class Series extends Model
     }
     public function fans()
     {
-        return $this->belongsToMany(User::class, 'favorites');
+        return $this->belongsToMany(\App\Models\User::class, 'favorites')->withTimestamps();
     }
+
 
     public function scopeActive($q)
     {

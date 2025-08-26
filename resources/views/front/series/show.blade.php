@@ -4,9 +4,11 @@
 @section('content')
 <div class="row g-4">
   <div class="col-md-4">
-    @if($series->cover_image)
-      <img src="{{ asset('storage/'.$series->cover_image) }}" class="img-fluid rounded-3" alt="{{ $series->title }}">
-    @endif
+   @php
+    $cover = $series->cover_image ? asset('storage/'.$series->cover_image) : asset('images/default-cover.jpg');
+   @endphp
+   <img src="{{ $cover }}" class="img-fluid rounded-3" alt="{{ $series->title }}">
+
 
     @auth
       <form method="POST" action="{{ route('favorites.store') }}" class="d-grid mt-3">
