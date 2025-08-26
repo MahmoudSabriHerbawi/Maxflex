@@ -33,10 +33,6 @@
         @if(is_null($n->read_at)) <span class="badge bg-primary ms-2">new</span> @endif
       </div>
 
-      <div class="small text-muted">
-        {{ $n->created_at->diffForHumans() }}
-      </div>
-
       <div class="mt-1">
         @if($type === 'series' && isset($data['id']))
           <a class="btn btn-sm btn-outline-primary" href="{{ route('front.series.show', $data['id']) }}">View series</a>
@@ -49,8 +45,9 @@
       </div>
     </div>
 
+    {{-- time moved here, ID removed --}}
     <div class="text-end small text-muted">
-      {{ $n->id }}
+      {{ $n->created_at->diffForHumans() }}
     </div>
   </div>
 @endforeach

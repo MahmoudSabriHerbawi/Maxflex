@@ -22,9 +22,11 @@ class SeriesController extends Controller
         return view('front.series.index', compact('series','categories'));
     }
 
-    public function show(Series $series)
+    public function show(\App\Models\Series $series)
     {
         $series->load(['categories','episodes'=>fn($q)=>$q->latest()]);
-        return view('front.series.show', compact('series'));
+        $isFavorited = auth()->check() && auth()->user()->favorites()->where('series_id', $series->id)->exists();
+        return view('front.series.show', compact('series','isFavorited'));
     }
+
 }

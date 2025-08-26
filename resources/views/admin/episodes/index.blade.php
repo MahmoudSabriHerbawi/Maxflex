@@ -43,10 +43,14 @@
         <td>{{ $e->release_date ?? 'N/A' }}</td>
         <td class="text-end">
           <a href="{{ route('admin.episodes.edit',$e) }}" class="btn btn-sm btn-warning">Edit</a>
+
+          @can('delete', $e)
           <form action="{{ route('admin.episodes.destroy',$e) }}" method="POST" class="d-inline">
             @csrf @method('DELETE')
             <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this episode?')">Delete</button>
           </form>
+          @endcan
+
         </td>
       </tr>
       @endforeach

@@ -11,14 +11,22 @@
 
 
     @auth
-      <form method="POST" action="{{ route('favorites.store') }}" class="d-grid mt-3">
+    @if($isFavorited)
+        <form method="POST" action="{{ route('favorites.destroy', $series->id) }}" class="d-grid mt-3">
+        @csrf @method('DELETE')
+        <button class="btn btn-outline-danger">Remove from Favorites</button>
+        </form>
+    @else
+        <form method="POST" action="{{ route('favorites.store') }}" class="d-grid mt-3">
         @csrf
         <input type="hidden" name="series_id" value="{{ $series->id }}">
         <button class="btn btn-success">Add to Favorites</button>
-      </form>
+        </form>
+    @endif
     @else
-      <a href="{{ route('login') }}" class="btn btn-outline-success mt-3 w-100">Login to add favorites</a>
+    <a href="{{ route('login') }}" class="btn btn-outline-success mt-3 w-100">Login to add favorites</a>
     @endauth
+
   </div>
 
   <div class="col-md-8">

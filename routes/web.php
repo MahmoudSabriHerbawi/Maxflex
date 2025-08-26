@@ -4,13 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
 // Front
+use App\Http\Controllers\Front\SeriesController as FrontSeries;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NotificationController;
 
 // Admin
-use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Admin\SeriesController as AdminSeries;
-use App\Http\Controllers\Front\SeriesController as FrontSeries;
 use App\Http\Controllers\Admin\EpisodeController as AdminEpisode;
 use App\Http\Controllers\Admin\CategoryController as AdminCategory;
 
@@ -20,10 +20,12 @@ use App\Http\Controllers\Admin\CategoryController as AdminCategory;
 |--------------------------------------------------------------------------
 */
 
+// Front pages
 Route::get('/', [FrontSeries::class, 'index'])->name('front.series.index');
 Route::get('/series/{series}', [FrontSeries::class, 'show'])->name('front.series.show');
 
 Route::middleware('auth')->group(function () {
+
     // Favorites
     Route::post('/favorites', [FavoriteController::class, 'store'])->name('favorites.store');
     Route::delete('/favorites/{series}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
@@ -31,17 +33,22 @@ Route::middleware('auth')->group(function () {
 
     // Notifications
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
-    Route::post('/notifications/read-all', [NotificationController  ::class, 'readAll'])->name('notifications.readAll');
+    Route::post('/notifications/read-all', [NotificationController::class, 'readAll'])->name('notifications.readAll');
 
-    // Admin
-    Route::prefix('admin')->name('admin.')->group(function () {
+    // Admin-only: Series & Categories
+    Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
         Route::resource('series', AdminSeries::class);
-        Route::resource('episodes', AdminEpisode::class)->except(['show']);
         Route::resource('categories', AdminCategory::class)->except(['show']);
     });
 
+    // Admin + Employee: Episodes
+    Route::middleware('role:admin,employee')->prefix('admin')->name('admin.')->group(function () {
+        Route::resource('episodes', AdminEpisode::class)->except(['show']);
+    });
+
+    // Dashboard & Profile
     Route::get('/dashboard', [DashboardController::class, 'index'])
-        ->middleware(['auth','verified'])->name('dashboard');
+        ->middleware('verified')->name('dashboard');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
